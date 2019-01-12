@@ -5,18 +5,22 @@ class Pages extends Controller {
     }
 
     public function index(){
-        $data = [
-            'title' => 'Welcome'
-        ];
+        $data = [];
 
         $this->view('pages/index', $data);
     }
 
-    public function about(){
+    public function secretary(){
         $data = [
             'title' => 'About Us'
         ];
 
-        $this->view('pages/about', $data);
+        $this->view('pages/secretary', $data);
+    }
+
+    public function announcements(){
+        $data=[];
+
+        $this->view('pages/announcements', $data);
     }
 }

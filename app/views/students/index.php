@@ -1,6 +1,8 @@
 <?php require  APPROOT . '/views/inc/header.php'?>
+    <!---------------------------------------->
     <ol class="breadcrumb">
-        <li class="active">Αρχική Σελίδα</li>
+        <li><a href="<?php echo URLROOT; ?>">Αρχική Σελίδα&nbsp;</a> </li>
+        <li class="active">/&nbsp;Φοιτητής</li>
     </ol>
     <hr>
     <!---------------------------------------->
@@ -9,6 +11,10 @@
         <div class="row content">
 
             <div class="col-sm-2 sidenav">
+                <!--<p><a href="#">Link</a></p>
+                <p><a href="#">Link</a></p>--
+                <p><a href="index.html"><img src="imgs/logo.png" width="100" height="100" alt=""></a></p>-->
+
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                         <div class="d-flex w-100 justify-content-between">
@@ -36,54 +42,6 @@
             </div>
 
             <div class="col-sm-8 text-left">
-
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" ><rect fill="#777" width="100%" height="100%"/></svg>
-                            <div class="container">
-                                <div class="carousel-caption text-right">
-                                    <h1>Important Announce 1.</h1>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" ><rect fill="#777" width="100%" height="100%"/></svg>
-                            <div class="container">
-                                <div class="carousel-caption text-right">
-                                    <h1>Important Announce 2.</h1>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" ><rect fill="#777" width="100%" height="100%"/></svg>
-                            <div class="container">
-                                <div class="carousel-caption text-right">
-                                    <h1>Important Announce 3.</h1>
-                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
 
                 <hr>
 
