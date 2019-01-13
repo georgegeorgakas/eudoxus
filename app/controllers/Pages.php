@@ -23,4 +23,16 @@ class Pages extends Controller {
 
         $this->view('pages/announcements', $data);
     }
+
+    public function login_type(){
+        $data = [];
+
+        $this->view('pages/login_type', $data);
+    }
+
+    public function register_type(){
+        $data = [];
+
+        $this->view('pages/register_type', $data);
+    }
 }

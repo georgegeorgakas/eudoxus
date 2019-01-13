@@ -1,6 +1,6 @@
 <?php
 
-class Student
+class User
 {
     private $db;
 
@@ -12,20 +12,24 @@ class Student
     /**
      * Register User
      * @param array $data
+     * @param string $category
      * @return bool
      */
-    public function register(array $data){
+    public function register(array $data, string $category){
 
         // Register the user
-        $this->db->query('INSERT INTO users (name, surname , password, email, username, relatedUniversity) 
-                            VALUES (:fname, :lname, :password, :email, :username, :university )');
+        $this->db->query('INSERT INTO users (userCategory, name, surname , password, email, username, telephoneNumber, relatedUniversity, address) 
+                            VALUES (:category, :fname, :lname, :passwords, :email, :username, :phone, :university, :address )');
         // Bind Values
+        $this->db->bind(':category',$category);
         $this->db->bind(':fname',$data['first_name']);
         $this->db->bind(':lname',$data['last_name']);
-        $this->db->bind(':password',$data['password']);
+        $this->db->bind(':passwords',$data['password']);
         $this->db->bind(':email',$data['email']);
         $this->db->bind(':username',$data['username']);
+        $this->db->bind(':phone',$data['phone']);
         $this->db->bind(':university',$data['university']);
+        $this->db->bind(':address',$data['address']);
 
         // Execute
         try{
@@ -80,12 +84,25 @@ class Student
         $this->db->query('SELECT * FROM users WHERE username = :key or email = :key');
         $this->db->bind(':key', $key);
         $row = $this->db->single();
-        $pass = $row->user_password;
+        $pass = $row->password;
         if($this->db->rowCount() > 0){
             if(password_verify($password, $pass)){
                 return $row;
             }
         }
         return false;
+    }
+
+    /**
+     * Get all Universities
+     * @return array
+     */
+    public function getAllUniversities(){
+        $this->db->query('SELECT * FROM university');
+        $row = $this->db->resultSet();
+        if($this->db->rowCount() > 0){
+            return $row;
+        }
+        return [];
     }
 }

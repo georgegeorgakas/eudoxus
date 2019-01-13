@@ -12,8 +12,8 @@
             <li class="nav-item <?php echo (isset($view) && $view==='pages/announcements') ? 'active' : '';?>">
                 <a class="nav-link" href="<?php echo URLROOT; ?>/pages/announcements">Ανακοινώσεις</a>
             </li>
-            <li class="nav-item <?php echo (isset($view) && $view==='students/index') ? 'active' : '';?>">
-                <a class="nav-link" href="<?php echo URLROOT; ?>/students/index">Φοιτητής</a>
+            <li class="nav-item <?php echo (isset($view) && $view==='users/index') ? 'active' : '';?>">
+                <a class="nav-link" href="<?php echo URLROOT; ?>/users/index">Φοιτητής</a>
             </li>
             <li class="nav-item <?php echo (isset($view) && $view==='pages/secretary') ? 'active' : '';?>">
                 <a class="nav-link" href="<?php echo URLROOT; ?>/pages/secretary">Γραμματεία</a>
@@ -26,11 +26,11 @@
                     <a class="nav-link" href="<?php echo URLROOT; ?>/<?php echo $_SESSION['type']; ?>/logout">Αποσύνδεση</a>
                 </li>
             <?php else : ?>
-                <li class="nav-item <?php echo (isset($view) && $view=== 'students/register') ? 'active' : '';?>">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/students/register">Εγγραφή</a>
+                <li class="nav-item <?php echo (isset($view) && $view=== 'users/register') ? 'active' : '';?>">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/pages/register_type">Εγγραφή</a>
                 </li>
-                <li class="nav-item <?php echo (isset($view) && $view==='students/login') ? 'active' : '';?>">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/students/login">Είσοδος</a>
+                <li class="nav-item <?php echo (isset($view) && $view==='users/login') ? 'active' : '';?>">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/pages/login_type">Είσοδος</a>
                 </li>
             <?php endif; ?>
         </ul>

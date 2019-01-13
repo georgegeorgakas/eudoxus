@@ -6,9 +6,9 @@
 
         <!--register-->
         <div class="col-lg-6 col-md-8 mx-auto mt-5">
-            <div class="card card-body mt-5" id="cardBodyReg">
+            <div class="card card-body mt-2">
                 <h2>Register</h2>
-                <form id="registerForm" action="<?php echo URLROOT; ?>/students/register" method="post">
+                <form id="registerForm" action="<?php echo URLROOT; ?>/users/register/<?php echo $data['type']; ?>" method="post">
 
                     <div class="form-row">
                         <div class="form-group col-sm-6">
@@ -54,7 +54,6 @@
                                    placeholder="Password"
                                    value="<?php echo $data['password']; ?>">
                             <span class="invalid-feedback"><?php echo $data['pass_error']; ?></span>
-                            <i class="fa fa-eye glyphicon" aria-hidden="true"></i>
                         </div>
                         <div class="form-group col-sm-6">
                             <input type="password"
@@ -74,15 +73,23 @@
                         </div>
                         <div class="form-group col-sm-12">
                             <input type="text"
-                                   name="university"
-                                   class="form-control form-control-lg <?php echo (!empty($data['university_error'])) ? 'is-invalid' : ''; ?>"
-                                   placeholder="University"
-                                   value="<?php echo $data['university']; ?>">
+                                   name="address"
+                                   class="form-control form-control-lg <?php echo (!empty($data['address_error'])) ? 'is-invalid' : ''; ?>"
+                                   placeholder="Address"
+                                   value="<?php echo $data['address']; ?>">
+                            <span class="invalid-feedback"><?php echo $data['address_error']; ?></span>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label for="inputGroupSelect01"></label><select name="university" class="form-control form-control-lg" id="inputGroupSelect01">
+                                <?php foreach($data['university'] as $key=>$university): ?>
+                                    <option value="<?php echo $key ?>"><?php echo $university->name;?></option>
+                                <?php endforeach; ?>
+                            </select>
                             <span class="invalid-feedback"><?php echo $data['university_error']; ?></span>
                         </div>
                     </div><!--form-row-->
-                    <div class="row mt-4">
-                        <div class="btn-group mr-4 mb-3" role="group" aria-label="Second group">
+                    <div class="row mt-2 ml-1">
+                        <div class="btn-group mb-3" role="group" aria-label="Second group">
                             <button type="submit"  value="Register" class="btn btn-success">Register</button>
                         </div>
                     </div>

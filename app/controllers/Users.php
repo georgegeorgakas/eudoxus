@@ -1,21 +1,23 @@
 <?php
 
-class Students extends Controller
+class Users extends Controller
 {
 
     public function __construct()
     {
-        $this->userModel = $this->model('Student');
+        $this->userModel = $this->model('User');
     }
 
     public function index(){
         $data = [];
 
-        $this->view('students/index', $data);
+        $this->view('users/index', $data);
     }
 
     // Registration method for user
-    public function register(){
+    public function register(string $user_type){
+
+        $universities = $this->userModel->getAllUniversities();
 
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -33,7 +35,9 @@ class Students extends Controller
                 'password' => trim($_POST['password']),
                 'confirm_password' => trim($_POST['confirm_password']),
                 'phone' => isset($_POST['phone']) ? trim($_POST['phone']) : '',
-                'university' => isset($_POST['university']),
+                'address' => isset($_POST['address']) ? trim($_POST['address']) : '',
+                'university' => $_POST['university'],
+                'type' => $user_type,
                 'fname_error' => '',
                 'lname_error' => '',
                 'username_error' => '',
@@ -43,8 +47,11 @@ class Students extends Controller
                 'register_error' => '',
                 'university_error' => '',
                 'phone_error' => '',
+                'address_error' => '',
             ];
 
+            $cell = $data['university'];
+            $data['university'] = $universities[$cell]->idUniversity;
             // Validate email
             if(empty($data['email'])){
                 $data['email_error'] = 'Please enter email';
@@ -99,16 +106,18 @@ class Students extends Controller
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 // Register User
-                if($this->userModel->register($data)){
+                if($this->userModel->register($data, $user_type)){
                     flash('register_success', 'You are now registered and you can log in');
-                    redirect('students/login');
+                    redirect('users/login');
                 } else{
                     $data['register_error'] = 'Something went wrong. Please try again.';
-                    $this->view('students/register', $data);
+                    $data['university'] = $universities;
+                    $this->view('users/register', $data);
                 }
             } else {
                 // Load view with errors
-                $this->view('students/register', $data);
+                $data['university'] = $universities;
+                $this->view('users/register', $data);
             }
         }else {
             // Init data
@@ -119,8 +128,10 @@ class Students extends Controller
                 'email' => '',
                 'password' => '',
                 'confirm_password' => '',
-                'university' => '',
+                'university' => isset($universities) ? $universities : '',
                 'phone' => '',
+                'address' => '',
+                'type' => $user_type,
                 'fname_error' => '',
                 'lname_error' => '',
                 'username_error' => '',
@@ -130,15 +141,16 @@ class Students extends Controller
                 'register_error' => '',
                 'university_error' => '',
                 'phone_error' => '',
+                'address_error' => '',
             ];
 
             // Load view
-            $this->view('students/register', $data);
+            $this->view('users/register', $data);
         }
     }
 
     // Login method
-    public function login() {
+    public function login(string  $user_type = 'student') {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -151,6 +163,7 @@ class Students extends Controller
                 'password' => trim($_POST['password']),
                 'login_credential_error' => '',
                 'pass_error' => '',
+                'type' => $user_type
             ];
 
             // Validate email/username
@@ -163,7 +176,7 @@ class Students extends Controller
                 $data['pass_error'] = 'Please enter password';
             }
 
-            //wrong  email
+            // Wrong  email or username
             if((!$this->userModel->findUserByUsername($data['login_credential'])) && (!$this->userModel->findUserByEmail($data['login_credential']))) {
                 $data['login_credential_error'] = 'Username/Email does not exist';
             }
@@ -175,13 +188,13 @@ class Students extends Controller
                 $isLoggedIn = $this->userModel->login($data['login_credential'], $data['password']);
                 if (!$isLoggedIn){
                     $data['pass_error'] = 'Password is wrong. Please try again.';
-                    $this->view('students/login', $data);
+                    $this->view('users/login', $data);
                 }else{
-                    $this->createUserSession($isLoggedIn);
+                    $this->createUserSession($isLoggedIn, $user_type);
                 }
             } else {
                 // Load view with errors
-                $this->view('students/login', $data);
+                $this->view('users/login', $data);
             }
 
         } else {
@@ -190,11 +203,52 @@ class Students extends Controller
                 'login_credential' => '',
                 'password' => '',
                 'login_credential_error' => '',
-                'pass_error' => ''
+                'pass_error' => '',
+                'type' => $user_type
             ];
 
             // Load view
-            $this->view('students/login', $data);
+            $this->view('users/login', $data);
+        }
+    }
+
+    // Create session for users
+    public function createUserSession($user, $type){
+        $_SESSION['username'] = $user->username;
+        $_SESSION['id'] = $user->idUsers;
+        $_SESSION['first_name'] = $user->name;
+        $_SESSION['last_name'] = $user->surname;
+        $_SESSION['type'] = $type;
+        redirect('users/profile/'.$_SESSION['type']);
+    }
+
+    // Logout method for users
+    public function logout(){
+        unset($_SESSION['username']);
+        unset($_SESSION['id']);
+        unset($_SESSION['first_name']);
+        unset($_SESSION['last_name']);
+        unset($_SESSION['type']);
+        session_destroy();
+        redirect('pages/index');
+    }
+
+    // Method to check if user is logged in.
+    public function isLoggedIn(){
+        if(isset($_SESSION['id'])){
+            return true;
+        }
+        return false;
+    }
+
+    // Method for user's profile
+    public function profile(){
+        if($this->isLoggedIn()){
+            $data = [];
+            // Load view
+            $this->view('users/profile', $data);
+        }else{
+            redirect('pages/index');
         }
     }
 }
