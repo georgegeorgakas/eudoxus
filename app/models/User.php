@@ -206,4 +206,34 @@ class User
         }
     }
 
+    /**
+     * Get all book ids from user
+     * @param $id
+     *
+     * @return array
+     */
+    public function getBookIdFromUser($id){
+        $this->db->query('SELECT books_id FROM users WHERE idUsers = :id');
+        $this->db->bind(':id', $id);
+        $ids = $this->db->single();
+        if($this->db->rowCount() > 0){
+            return $ids;
+        }
+        return [];
+    }
+
+    /**
+     * Get single book by book id
+     * @param id
+     * @return array
+     */
+    public function getBookByBookId($id){
+        $this->db->query('SELECT * FROM books WHERE idBooks = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        if($this->db->rowCount() > 0){
+            return $row;
+        }
+        return [];
+    }
 }

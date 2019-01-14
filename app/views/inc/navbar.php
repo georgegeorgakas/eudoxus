@@ -9,7 +9,7 @@
             <li class="nav-item <?php echo (isset($view) && $view==='pages/index') ? 'active' : '';?>">
                 <a class="nav-link" href="<?php echo URLROOT; ?>">Αρχική</a>
             </li><li class="nav-item <?php echo (isset($view) && $view==='pages/search') ? 'active' : '';?>">
-                <a class="nav-link" href="<?php echo URLROOT; ?>/pages/search">Αναζήτηση Βιβλίων</a>
+                <a class="nav-link" href="<?php echo URLROOT; ?>/pages/search">Δήλωση Βιβλίων</a>
             </li>
             <li class="nav-item <?php echo (isset($view) && $view==='pages/announcements') ? 'active' : '';?>">
                 <a class="nav-link" href="<?php echo URLROOT; ?>/pages/announcements">Ανακοινώσεις</a>

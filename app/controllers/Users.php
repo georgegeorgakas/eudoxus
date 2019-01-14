@@ -256,6 +256,8 @@ class Users extends Controller
             $data = [
                 'tab' => $tab
             ];
+            $book_id = $this->userModel->getBookIdFromUser($_SESSION['id']);
+            $data['book'] = $this->userModel->getBookByBookId($book_id->books_id);
             $this->view('users/profile', $data);
         }else {
             redirect('users/profile/account');

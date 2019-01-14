@@ -61,5 +61,38 @@ class Pages extends Controller {
         }
     }
 
+    public function book(string $id){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+
+            // Init data
+            $data = [
+                'stock' => $_POST['stock'],
+                'stock_error' => ''
+            ];
+
+            if($data['stock'] == 0){
+                $data['stock_error'] = 'We are sorry. No more books left.';
+                $data['book'] = $this->pageModel->getSingleBookById($id);
+                $this->view('pages/book', $data);
+            }else{
+                $stock = $data['stock'] +0;
+                if($this->pageModel->updateUserBooks($_SESSION['id'], $id) && $this->pageModel->updateStockInBooks($stock-1, $id)){
+                    redirect('users/profile/account');
+                }else{
+                    redirect('pages/index');
+                }
+            }
+        }else{
+            if(isset($_SESSION['id'])){
+                $data['book'] = $this->pageModel->getSingleBookById($id);
+
+                $this->view('pages/book', $data);
+            }else {
+                redirect('pages/index');
+            }
+        }
+    }
 }

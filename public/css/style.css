@@ -220,6 +220,10 @@ footer {
     color: #ffffff;
 }
 
+.profile_book {
+    padding: 20px;
+}
+
 /**
  Search page CSS
  */

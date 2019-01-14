@@ -145,6 +145,12 @@
                 <?php elseif ($data['tab'] === 'books') : ?>
                     <div class="col-md-12 profile_boxes">
                         <h4>Τα βιβλία μου</h4>
+                        <div class="profile_book">
+                            <p><span>Τίτλος: </span><?php echo $data['book']->title; ?></p>
+                            <p><span>Συγγραφέας:</span><?php echo $data['book']->author; ?></p>
+                            <p>Απέμειναν <span class="badge badge-primary badge-pill"><?php echo $data['book']->books_left; ?></span> βιβλία.</p>
+                            <p><span>Περιγραφή:</span><?php echo $data['book']->description; ?></p>
+                        </div>
                     </div>
 
                     <!-- It should should never reach this display but just in case -->
