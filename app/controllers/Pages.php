@@ -46,12 +46,20 @@ class Pages extends Controller {
 
             $data['result'] = $this->pageModel->getAllBooksBySearch($data['value']);
 
+            if(empty($data['result'])){
+                $data['empty'] = 1;
+            }else {
+                $data['empty'] = 0;
+            }
             $this->view('pages/search',$data);
         }else{
-            $data = [];
+            $data = [
+                'empty' => 0
+            ];
 
             $this->view('pages/search',$data);
         }
-
     }
+
+
 }

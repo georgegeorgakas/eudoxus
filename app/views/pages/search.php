@@ -60,9 +60,13 @@
 
                         <p>Απέμειναν <span class="badge badge-primary badge-pill"><?php echo $result->books_left; ?></span>βιβλία.</p>
                         <p><span>Περιγραφή:</span><?php echo $result->description; ?></p>
-                        <a class="btn btn-success" href="<?php echo isset($_SESSION['id']) ? URLROOT.'/users/profile' : URLROOT.'/pages/login_type'; ?>">Δήλωση</a>
+                        <a class="btn btn-success" href="<?php echo isset($_SESSION['id']) ? URLROOT.'/pages/book'.$result->idBooks : URLROOT.'/pages/login_type'; ?>">Δήλωση</a>
                     </li>
-                <?php endforeach; }?>
+                <?php endforeach; } if($data['empty']){ ?>
+                    <li class="books_list">
+                        <p>Δυστυχώς δε βρέθηκαν βιβλία. Παρακαλώ προσπαθείστε ξανά.</p>
+                    </li>
+                <?php } ?>
                 </ul>
             </div>
         </div>
