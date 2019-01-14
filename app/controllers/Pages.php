@@ -2,6 +2,7 @@
 
 class Pages extends Controller {
     public function __construct(){
+        $this->pageModel = $this->model('Page');
     }
 
     public function index(){
@@ -34,5 +35,23 @@ class Pages extends Controller {
         $data = [];
 
         $this->view('pages/register_type', $data);
+    }
+
+    public function search(){
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $data = [
+                'value' => trim($_POST['search'])
+            ];
+
+            $data['result'] = $this->pageModel->getAllBooksBySearch($data['value']);
+
+            $this->view('pages/search',$data);
+        }else{
+            $data = [];
+
+            $this->view('pages/search',$data);
+        }
+
     }
 }

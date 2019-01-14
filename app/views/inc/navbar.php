@@ -8,6 +8,8 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item <?php echo (isset($view) && $view==='pages/index') ? 'active' : '';?>">
                 <a class="nav-link" href="<?php echo URLROOT; ?>">Αρχική</a>
+            </li><li class="nav-item <?php echo (isset($view) && $view==='pages/search') ? 'active' : '';?>">
+                <a class="nav-link" href="<?php echo URLROOT; ?>/pages/search">Αναζήτηση Βιβλίων</a>
             </li>
             <li class="nav-item <?php echo (isset($view) && $view==='pages/announcements') ? 'active' : '';?>">
                 <a class="nav-link" href="<?php echo URLROOT; ?>/pages/announcements">Ανακοινώσεις</a>
@@ -19,11 +21,11 @@
                 <a class="nav-link" href="<?php echo URLROOT; ?>/pages/secretary">Γραμματεία</a>
             </li>
             <?php if(isset($_SESSION['id'])) : ?>
-                <li class="nav-item <?php echo (isset($view) && $view=== $_SESSION['type'] . '/profile') ? 'active' : '';?>">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/<?php echo $_SESSION['type']; ?>/profile/<?php echo $_SESSION['username'];?>">Προφίλ</a>
+                <li class="nav-item <?php echo (isset($view) && $view=== 'users/profile') ? 'active' : '';?>">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/profile/account">Προφίλ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/<?php echo $_SESSION['type']; ?>/logout">Αποσύνδεση</a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Αποσύνδεση</a>
                 </li>
             <?php else : ?>
                 <li class="nav-item <?php echo (isset($view) && $view=== 'users/register') ? 'active' : '';?>">
